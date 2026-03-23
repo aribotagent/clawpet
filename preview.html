@@ -2,86 +2,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ClawPet — Preview</title>
+<title>ClawPet</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #0a0a14; color: #e2e8f0; font-family: -apple-system, sans-serif; padding: 32px; }
-h1 { font-size: 24px; margin-bottom: 24px; }
-h2 { font-size: 16px; margin: 24px 0 12px; color: #94a3b8; }
-.grid { display: flex; flex-wrap: wrap; gap: 16px; }
-.card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; text-align: center; width: 90px; }
-.card .label { font-size: 10px; color: #64748b; margin-top: 6px; }
-.card .name { font-size: 11px; color: #cbd5e1; font-weight: 600; }
-.lobster-wrap { width: 56px; height: 56px; margin: 0 auto; }
-.lobster-wrap img { width: 56px; height: 56px; }
-.section { margin-bottom: 32px; }
-.anim-idle img { animation: bob 3s ease-in-out infinite; }
-.anim-working img { animation: work 0.6s ease-in-out infinite; }
-.anim-searching img { animation: search 1.2s ease-in-out infinite; }
-.anim-thinking img { animation: think 2s ease-in-out infinite; }
-.anim-sleeping img { animation: sleep 4s ease-in-out infinite; }
-.anim-error img { animation: shake 0.3s ease-in-out infinite; }
-.anim-done img { animation: celebrate 0.5s ease-in-out infinite; }
-.anim-waiting img { animation: bob 1.5s ease-in-out infinite; }
-@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
-@keyframes work { 0%,100%{transform:rotate(-8deg) scale(1.05)} 50%{transform:rotate(8deg) scale(1.05)} }
-@keyframes search { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
-@keyframes think { 0%,80%,100%{transform:scale(1)} 40%{transform:scale(0.95) rotate(5deg)} }
-@keyframes sleep { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(0.95);opacity:0.7} }
-@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-3px)} 60%{transform:translateX(3px)} }
-@keyframes celebrate { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-8px) scale(1.15)} }
+body{background:#0a0a14;color:#e2e8f0;font-family:-apple-system,sans-serif;padding:20px;}
+h1{font-size:20px;margin-bottom:16px;}
+h2{font-size:14px;margin:16px 0 8px;color:#94a3b8;}
+.grid{display:flex;gap:12px;flex-wrap:wrap;}
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px;text-align:center;}
+.card img{width:64px;height:64px;}
+.card .name{font-size:10px;margin-top:4px;}
 </style>
 </head>
 <body>
-<h1>🦞 ClawPet — Preview</h1>
-
-<div class="section">
-<h2>Evolution Stages (idle)</h2>
-<div class="grid" id="stages"></div>
-</div>
-
-<div class="section">
-<h2>All States (Shrimp)</h2>
-<div class="grid" id="states"></div>
-</div>
-
-<div class="section">
-<h2>All States (Aquarex)</h2>
-<div class="grid" id="states2"></div>
-</div>
-
-<script>
-const STAGES = [
-  {id:"shrimp",name:"🦐 shrimp"},
-  {id:"aquarex",name:"🌊 Aquarex"},
-  {id:"crimbolt",name:"🔥 Crimbolt"},
-  {id:"emberclaw",name:"⚔️ Emberclaw"},
-  {id:"nebulacrab",name:"🌌 Nebulacrab"}
-];
-const STATES = ["idle","thinking","working","searching","waiting","error","done","sleeping"];
-const BASE = "extension/assets/sprites";
-
-function img(stage,state){
-  return `<img src="${BASE}/${stage}/${state}.png" alt="${stage} ${state}">`;
-}
-
-// Render stages
-const stagesEl=document.getElementById("stages");
-STAGES.forEach(s=>{
-  stagesEl.innerHTML+=`<div class="card"><div class="lobster-wrap anim-idle">${img(s.id,"idle")}</div><div class="name">${s.name}</div></div>`;
-});
-
-// Render states for shrimp
-const statesEl=document.getElementById("states");
-STATES.forEach(state=>{
-  statesEl.innerHTML+=`<div class="card"><div class="lobster-wrap anim-${state}">${img("shrimp",state)}</div><div class="label">${state}</div></div>`;
-});
-
-// Render states for aquarex
-const statesEl2=document.getElementById("states2");
-STATES.forEach(state=>{
-  statesEl2.innerHTML+=`<div class="card"><div class="lobster-wrap anim-${state}">${img("aquarex",state)}</div><div class="label">${state}</div></div>`;
-});
-</script>
+<h1>🦞 ClawPet - Evolution Stages</h1>
+<h2>Shrimp</h2>
+<div class="grid"><img src="extension/assets/sprites/shrimp/idle.png"><img src="extension/assets/sprites/shrimp/working.png"><img src="extension/assets/sprites/shrimp/thinking.png"><img src="extension/assets/sprites/shrimp/searching.png"><img src="extension/assets/sprites/shrimp/done.png"><img src="extension/assets/sprites/shrimp/error.png"><img src="extension/assets/sprites/shrimp/sleeping.png"><img src="extension/assets/sprites/shrimp/waiting.png"></div>
+<h2>Aquarex</h2>
+<div class="grid"><img src="extension/assets/sprites/aquarex/idle.png"><img src="extension/assets/sprites/aquarex/working.png"><img src="extension/assets/sprites/aquarex/thinking.png"><img src="extension/assets/sprites/aquarex/searching.png"><img src="extension/assets/sprites/aquarex/done.png"><img src="extension/assets/sprites/aquarex/error.png"><img src="extension/assets/sprites/aquarex/sleeping.png"><img src="extension/assets/sprites/aquarex/waiting.png"></div>
+<h2>Crimbolt</h2>
+<div class="grid"><img src="extension/assets/sprites/crimbolt/idle.png"><img src="extension/assets/sprites/crimbolt/working.png"><img src="extension/assets/sprites/crimbolt/thinking.png"><img src="extension/assets/sprites/crimbolt/searching.png"><img src="extension/assets/sprites/crimbolt/done.png"><img src="extension/assets/sprites/crimbolt/error.png"><img src="extension/assets/sprites/crimbolt/sleeping.png"><img src="extension/assets/sprites/crimbolt/waiting.png"></div>
+<h2>Emberclaw</h2>
+<div class="grid"><img src="extension/assets/sprites/emberclaw/idle.png"><img src="extension/assets/sprites/emberclaw/working.png"><img src="extension/assets/sprites/emberclaw/thinking.png"><img src="extension/assets/sprites/emberclaw/searching.png"><img src="extension/assets/sprites/emberclaw/done.png"><img src="extension/assets/sprites/emberclaw/error.png"><img src="extension/assets/sprites/emberclaw/sleeping.png"><img src="extension/assets/sprites/emberclaw/waiting.png"></div>
+<h2>Nebulacrab</h2>
+<div class="grid"><img src="extension/assets/sprites/nebulacrab/idle.png"><img src="extension/assets/sprites/nebulacrab/working.png"><img src="extension/assets/sprites/nebulacrab/thinking.png"><img src="extension/assets/sprites/nebulacrab/searching.png"><img src="extension/assets/sprites/nebulacrab/done.png"><img src="extension/assets/sprites/nebulacrab/error.png"><img src="extension/assets/sprites/nebulacrab/sleeping.png"><img src="extension/assets/sprites/nebulacrab/waiting.png"></div>
 </body>
 </html>
