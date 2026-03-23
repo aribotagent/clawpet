@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "ClawPet",
+  "version": "1.0.0",
+  "description": "Your OpenClaw agent as an evolving lobster. Watch it work, dress it up, open daily boxes.",
+  "permissions": ["storage", "alarms"],
+  "host_permissions": ["http://localhost:7474/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles/overlay.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "assets/icons/icons/icon16.png",
+      "48": "assets/icons/icons/icon48.png",
+      "128": "assets/icons/icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "assets/icons/icons/icon16.png",
+    "48": "assets/icons/icons/icon48.png",
+    "128": "assets/icons/icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/sprites/**", "assets/items/**"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

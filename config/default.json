@@ -1,0 +1,13 @@
+{
+  "port": 7474,
+  "poll_interval_ms": 2000,
+  "idle_threshold_min": 5,
+  "sleep_threshold_min": 30,
+  "max_agents_display": 12,
+  "agents_per_row": 4,
+  "feed_cost_usd": 5,
+  "daily_feed_limit": 3,
+  "daily_box_limit": 1,
+  "treasury_address": "",
+  "token_contract": ""
+}

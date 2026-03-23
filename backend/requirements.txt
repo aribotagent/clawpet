@@ -1,0 +1,2 @@
+# Agent Pet backend dependencies
+# Standard library only — no external deps required

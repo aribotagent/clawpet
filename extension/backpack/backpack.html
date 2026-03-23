@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ClawPet — Backpack</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background: #0a0a14;
+      color: #e2e8f0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .header {
+      padding: 24px 32px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .sub { color: #64748b; font-size: 13px; }
+
+    .main { padding: 24px 32px; max-width: 640px; }
+
+    .section-title {
+      font-size: 12px; font-weight: 600; color: #64748b;
+      text-transform: uppercase; letter-spacing: 0.6px;
+      margin: 20px 0 10px;
+    }
+
+    /* Agent selector */
+    .agent-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .agent-tab {
+      padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 13px;
+      border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04);
+      color: #94a3b8; transition: all 0.15s;
+    }
+    .agent-tab.active {
+      background: rgba(96,165,250,0.15); border-color: rgba(96,165,250,0.4); color: #60a5fa;
+    }
+
+    /* Item grid */
+    .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; }
+    .item-card {
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 14px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .item-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); }
+    .item-card.equipped {
+      border-color: rgba(251,191,36,0.5);
+      background: rgba(251,191,36,0.07);
+    }
+    .item-emoji { font-size: 32px; margin-bottom: 8px; }
+    .item-name { font-size: 12px; font-weight: 600; color: #cbd5e1; }
+    .item-rarity {
+      font-size: 10px; margin-top: 3px; padding: 1px 6px;
+      border-radius: 10px; display: inline-block;
+    }
+    .rarity-common { background: rgba(148,163,184,0.15); color: #94a3b8; }
+    .rarity-rare   { background: rgba(251,191,36,0.15);  color: #fbbf24; }
+    .item-equipped-badge {
+      font-size: 10px; color: #fbbf24; margin-top: 4px; font-weight: 600;
+    }
+
+    .empty-msg { color: #475569; font-size: 14px; padding: 32px 0; text-align: center; }
+
+    /* Unequip btn */
+    #unequipBtn {
+      margin-top: 16px;
+      padding: 8px 20px;
+      border: 1px solid rgba(248,113,113,0.3);
+      background: rgba(248,113,113,0.08);
+      color: #f87171;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      display: none;
+    }
+    #unequipBtn:hover { background: rgba(248,113,113,0.15); }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🎒 Item Backpack</h1>
+    <div class="sub">Equip items to dress up your lobster</div>
+  </div>
+
+  <div class="main">
+    <div class="section-title">Select Agent</div>
+    <div class="agent-tabs" id="agentTabs"></div>
+
+    <div class="section-title">Your Items</div>
+    <div class="item-grid" id="itemGrid"></div>
+
+    <button id="unequipBtn">Unequip current item</button>
+  </div>
+
+  <script src="backpack.js"></script>
+</body>
+</html>
