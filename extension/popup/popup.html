@@ -14,7 +14,7 @@
     }
 
     .header {
-      padding: 14px 16px 10px;
+      padding: 12px 16px 10px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       display: flex;
       align-items: center;
@@ -31,8 +31,23 @@
     .api-online  { background: rgba(52,211,153,0.15); color: #34d399; }
     .api-offline { background: rgba(248,113,113,0.15); color: #f87171; }
 
-    .section { padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .section-title { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .lobster-display {
+      padding: 16px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .lobster-img {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 8px;
+      image-rendering: pixelated;
+    }
+    .lobster-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .lobster-state { font-size: 11px; color: #64748b; }
+
+    .section { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .section-title { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .section-desc { font-size: 10px; color: #475569; margin-bottom: 8px; line-height: 1.4; }
 
     .agent-row {
       display: flex;
@@ -57,26 +72,61 @@
     .state-done     { color: #34d399; background: rgba(52,211,153,0.12); }
     .state-sleeping { color: #64748b; background: rgba(71,85,105,0.2); }
 
-    .evolution-bar { margin-top: 6px; }
+    .evolution-bar { margin-top: 8px; }
     .evo-info { display: flex; justify-content: space-between; margin-bottom: 4px; }
-    .evo-stage { font-weight: 600; }
-    .evo-pct { color: #64748b; }
-    .bar { height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
+    .evo-stage { font-weight: 600; font-size: 12px; }
+    .evo-pct { color: #64748b; font-size: 11px; }
+    .bar { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
     .bar-fill { height: 100%; background: linear-gradient(90deg, #f97316, #ef4444); border-radius: 3px; transition: width 0.4s; }
 
-    .btn-row { display: flex; gap: 6px; padding: 10px 16px; }
-    .btn {
-      flex: 1; padding: 7px 4px; border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.05); color: #cbd5e1;
-      border-radius: 8px; cursor: pointer; font-size: 11px;
-      text-align: center; transition: background 0.15s;
-      display: flex; flex-direction: column; align-items: center; gap: 2px;
+    /* Icon-only buttons with hover tooltip */
+    .btn-row { 
+      display: flex; 
+      gap: 4px; 
+      padding: 8px 16px 12px; 
+      justify-content: center;
     }
-    .btn:hover { background: rgba(255,255,255,0.1); }
-    .btn-icon { font-size: 16px; }
-    .btn-backpack { color: #fbbf24; border-color: rgba(251,191,36,0.2); }
-    .btn-box { color: #a855f7; border-color: rgba(168,85,247,0.2); }
-    .btn-dash { color: #60a5fa; border-color: rgba(96,165,250,0.2); }
+    .btn {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: all 0.15s;
+    }
+    .btn:hover { background: rgba(255,255,255,0.15); transform: scale(1.1); }
+    .btn:active { transform: scale(0.95); }
+    
+    /* Tooltip on hover */
+    .btn::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s;
+      margin-bottom: 6px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .btn:hover::after { opacity: 1; }
+
+    .btn-box::after { content: "Daily Box"; }
+    .btn-backpack::after { content: "Backpack"; }
+    .btn-dash::after { content: "Dashboard"; }
 
     .offline-msg { padding: 16px; text-align: center; color: #64748b; }
     .offline-msg a { color: #60a5fa; text-decoration: none; }
@@ -95,19 +145,11 @@
     <div class="offline-msg">Loading...</div>
   </div>
 
+  <!-- Icon-only buttons with hover tooltips -->
   <div class="btn-row">
-    <button class="btn btn-box" id="btnBox">
-      <span class="btn-icon">🎁</span>
-      <span>Daily Box</span>
-    </button>
-    <button class="btn btn-backpack" id="btnBackpack">
-      <span class="btn-icon">🎒</span>
-      <span>Backpack</span>
-    </button>
-    <button class="btn btn-dash" id="btnDashboard">
-      <span class="btn-icon">📊</span>
-      <span>Dashboard</span>
-    </button>
+    <button class="btn btn-box" id="btnBox" data-tooltip="Daily Box">🎁</button>
+    <button class="btn btn-backpack" id="btnBackpack" data-tooltip="Backpack">🎒</button>
+    <button class="btn btn-dash" id="btnDashboard" data-tooltip="Dashboard">📊</button>
   </div>
 
   <script src="popup.js"></script>
