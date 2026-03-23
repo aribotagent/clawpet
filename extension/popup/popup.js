@@ -1,5 +1,4 @@
-const STATE_EMOJI = { idle:"🦞", thinking:"🤔", working:"⚡", searching:"🔍", waiting:"⏳", error:"❌", done:"✅", sleeping:"💤" };
-const STAGE_EMOJI = { shrimp:"🦐", aquarex:"🌊", crimbolt:"🔥", emberclaw:"⚔️", nebulacrab:"🌌" };
+const STATE_EMOJI = { idle:"🛌", thinking:"🤔", working:"⚡", searching:"🔍", waiting:"⏳", error:"❌", done:"✅", sleeping:"💤" };
 const STAGE_NAMES = { shrimp:"🦐 shrimp", aquarex:"🌊 Aquarex", crimbolt:"🔥 Crimbolt", emberclaw:"⚔️ Emberclaw", nebulacrab:"🌌 Nebulacrab" };
 
 chrome.runtime.sendMessage({ type: "GET_STATUS" }, (res) => {
@@ -21,54 +20,54 @@ chrome.runtime.sendMessage({ type: "GET_STATUS" }, (res) => {
 
   let html = "";
 
-  // Lobster display section - larger and prominent
+  // Main lobster display with animation
   if (agents.length > 0) {
     const mainAgent = agents[0];
     const stageId = mainAgent.evolution_stage || "shrimp";
     const state = mainAgent.state || "idle";
     const stageName = STAGE_NAMES[stageId] || STAGE_NAMES.shrimp;
-    const stateEmoji = STATE_EMOJI[state] || "🦞";
+    const stateEmoji = STATE_EMOJI[state] || "🛌";
     
     html += `
-      <div class="lobster-display">
+      <div class="lobster-main">
         <img class="lobster-img" src="assets/sprites/${stageId}/${state}.png" alt="${stageName}" onerror="this.style.display='none'">
         <div class="lobster-name">${stageName}</div>
         <div class="lobster-state">${stateEmoji} ${mainAgent.task || mainAgent.state || "idle"}</div>
       </div>`;
   }
 
-  // Agents section
+  // All agents in one section
   if (agents.length > 0) {
     html += `<div class="section"><div class="section-title">Agents</div>`;
     for (const agent of agents.slice(0, 6)) {
+      const stageId = agent.evolution_stage || "shrimp";
+      const state = agent.state || "idle";
       html += `
         <div class="agent-row">
-          <div class="agent-emoji">${STATE_EMOJI[agent.state] || "🦞"}</div>
+          <img class="agent-img" src="assets/sprites/${stageId}/${state}.png" onerror="this.style.display='none'">
           <div class="agent-info">
             <div class="agent-name">${escHtml(agent.display_name)}</div>
             ${agent.task ? `<div class="agent-task">${escHtml(agent.task)}</div>` : ""}
           </div>
-          <span class="agent-state state-${agent.state}">${agent.state}</span>
+          <span class="agent-state state-${state}">${state}</span>
         </div>`;
     }
     html += `</div>`;
   }
 
-  // Evolution section with description
+  // Evolution section
   if (evolution) {
     const pct = Math.round((evolution.progress || 0) * 100);
     html += `
       <div class="section">
         <div class="section-title">Evolution</div>
-        <div class="section-desc">Your lobster evolves by using AI agents. The more tokens you use daily, the faster it evolves!</div>
-        <div class="evolution-bar">
-          <div class="evo-info">
-            <span class="evo-stage">${evolution.current_stage?.name || "🦐 shrimp"}</span>
-            <span class="evo-pct">${pct}%</span>
-          </div>
-          <div class="bar"><div class="bar-fill" style="width:${pct}%"></div></div>
-          ${evolution.next_stage ? `<div style="font-size:11px;color:#64748b;margin-top:4px">Next: ${evolution.next_stage.name} (${(evolution.next_stage.tokens || 50000).toLocaleString()} tokens/day)</div>` : ""}
+        <div class="evo-desc">Your lobster evolves by using AI agents. More daily token usage = faster evolution!</div>
+        <div class="evo-info">
+          <span class="evo-stage">${evolution.current_stage?.name || "🦐 shrimp"}</span>
+          <span class="evo-pct">${pct}%</span>
         </div>
+        <div class="bar"><div class="bar-fill" style="width:${pct}%"></div></div>
+        ${evolution.next_stage ? `<div class="evo-next">Next: ${evolution.next_stage.name} (${(evolution.next_stage.tokens || 50000).toLocaleString()} tokens/day)</div>` : ""}
       </div>`;
   }
 

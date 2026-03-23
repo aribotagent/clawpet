@@ -14,15 +14,13 @@
     }
 
     .header {
-      padding: 12px 16px 10px;
+      padding: 12px 16px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
     .header-title { font-size: 15px; font-weight: 700; color: #f1f5f9; }
-    .header-sub { font-size: 11px; color: #64748b; }
-
     .api-status {
       font-size: 11px;
       padding: 2px 8px;
@@ -31,69 +29,107 @@
     .api-online  { background: rgba(52,211,153,0.15); color: #34d399; }
     .api-offline { background: rgba(248,113,113,0.15); color: #f87171; }
 
-    .lobster-display {
-      padding: 16px;
+    /* Main lobster display - big with animation */
+    .lobster-main {
+      padding: 20px 16px;
       text-align: center;
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .lobster-img {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 8px;
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 12px;
       image-rendering: pixelated;
+      animation: lobster-bob 2s ease-in-out infinite;
     }
-    .lobster-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-    .lobster-state { font-size: 11px; color: #64748b; }
+    @keyframes lobster-bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .lobster-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .lobster-state { font-size: 12px; color: #64748b; }
 
+    /* Agents section */
     .section { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .section-title { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
-    .section-desc { font-size: 10px; color: #475569; margin-bottom: 8px; line-height: 1.4; }
+    .section-title { 
+      font-size: 10px; 
+      color: #64748b; 
+      text-transform: uppercase; 
+      letter-spacing: 0.5px; 
+      margin-bottom: 10px;
+    }
 
     .agent-row {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 0;
+      gap: 10px;
+      padding: 8px 0;
       border-bottom: 1px solid rgba(255,255,255,0.04);
     }
     .agent-row:last-child { border-bottom: none; }
-    .agent-emoji { font-size: 20px; }
+    .agent-img {
+      width: 40px;
+      height: 40px;
+      image-rendering: pixelated;
+    }
     .agent-info { flex: 1; overflow: hidden; }
-    .agent-name { font-weight: 600; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .agent-name { font-weight: 600; font-size: 13px; }
     .agent-task { font-size: 11px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .agent-state { font-size: 10px; padding: 2px 6px; border-radius: 10px; font-weight: 600; }
+    .agent-state { 
+      font-size: 10px; 
+      padding: 3px 8px; 
+      border-radius: 12px; 
+      font-weight: 600;
+      white-space: nowrap;
+    }
 
-    .state-working  { color: #34d399; background: rgba(52,211,153,0.12); }
-    .state-searching { color: #60a5fa; background: rgba(96,165,250,0.12); }
+    .state-working  { color: #34d399; background: rgba(52,211,153,0.15); }
+    .state-searching { color: #60a5fa; background: rgba(96,165,250,0.15); }
     .state-idle     { color: #94a3b8; background: rgba(148,163,184,0.1); }
-    .state-thinking { color: #a78bfa; background: rgba(167,139,250,0.12); }
-    .state-waiting  { color: #fbbf24; background: rgba(251,191,36,0.12); }
-    .state-error    { color: #f87171; background: rgba(248,113,113,0.12); }
-    .state-done     { color: #34d399; background: rgba(52,211,153,0.12); }
+    .state-thinking { color: #a78bfa; background: rgba(167,139,250,0.15); }
+    .state-waiting  { color: #fbbf24; background: rgba(251,191,36,0.15); }
+    .state-error    { color: #f87171; background: rgba(248,113,113,0.15); }
+    .state-done     { color: #34d399; background: rgba(52,211,153,0.15); }
     .state-sleeping { color: #64748b; background: rgba(71,85,105,0.2); }
 
-    .evolution-bar { margin-top: 8px; }
-    .evo-info { display: flex; justify-content: space-between; margin-bottom: 4px; }
+    /* Evolution section */
+    .evo-desc { 
+      font-size: 10px; 
+      color: #475569; 
+      margin-bottom: 10px; 
+      line-height: 1.4; 
+    }
+    .evo-info { display: flex; justify-content: space-between; margin-bottom: 6px; }
     .evo-stage { font-weight: 600; font-size: 12px; }
     .evo-pct { color: #64748b; font-size: 11px; }
     .bar { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
-    .bar-fill { height: 100%; background: linear-gradient(90deg, #f97316, #ef4444); border-radius: 3px; transition: width 0.4s; }
+    .bar-fill { 
+      height: 100%; 
+      background: linear-gradient(90deg, #f97316, #ef4444); 
+      border-radius: 3px; 
+      transition: width 0.4s; 
+    }
+    .evo-next { 
+      font-size: 10px; 
+      color: #64748b; 
+      margin-top: 6px; 
+    }
 
     /* Icon-only buttons with hover tooltip */
     .btn-row { 
       display: flex; 
-      gap: 4px; 
-      padding: 8px 16px 12px; 
+      gap: 8px; 
+      padding: 12px 16px; 
       justify-content: center;
     }
     .btn {
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border: 1px solid rgba(255,255,255,0.1);
       background: rgba(255,255,255,0.05);
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -119,25 +155,18 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.15s;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       border: 1px solid rgba(255,255,255,0.1);
     }
     .btn:hover::after { opacity: 1; }
 
-    .btn-box::after { content: "Daily Box"; }
-    .btn-backpack::after { content: "Backpack"; }
-    .btn-dash::after { content: "Dashboard"; }
-
-    .offline-msg { padding: 16px; text-align: center; color: #64748b; }
+    .offline-msg { padding: 20px; text-align: center; color: #64748b; }
     .offline-msg a { color: #60a5fa; text-decoration: none; }
   </style>
 </head>
 <body>
   <div class="header">
-    <div>
-      <div class="header-title">🦞 ClawPet</div>
-      <div class="header-sub">Your lobster army</div>
-    </div>
+    <div class="header-title">🦞 ClawPet</div>
     <div class="api-status" id="apiStatus">...</div>
   </div>
 
@@ -147,9 +176,9 @@
 
   <!-- Icon-only buttons with hover tooltips -->
   <div class="btn-row">
-    <button class="btn btn-box" id="btnBox" data-tooltip="Daily Box">🎁</button>
-    <button class="btn btn-backpack" id="btnBackpack" data-tooltip="Backpack">🎒</button>
-    <button class="btn btn-dash" id="btnDashboard" data-tooltip="Dashboard">📊</button>
+    <button class="btn" id="btnBox" data-tooltip="Daily Box">🎁</button>
+    <button class="btn" id="btnBackpack" data-tooltip="Backpack">🎒</button>
+    <button class="btn" id="btnDashboard" data-tooltip="Dashboard">📊</button>
   </div>
 
   <script src="popup.js"></script>
